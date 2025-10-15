@@ -1,116 +1,5 @@
-// Cấu hình danh sách ảnh theo đúng thứ tự yêu cầu (từ thư mục DaIU)
-// Lưu ý tên file có dấu và khoảng trắng: dùng đúng chuỗi như trong hệ thống file
-const daiUImages = [
-  "DaIU/Trang chủ.png",
-  "DaIU/Trang chủ (2).png",
-  "DaIU/Trang chủ (3).png",
-  "DaIU/Trang chủ (4).png",
-  "DaIU/Trang chủ (5).png",
-  "DaIU/Trang chủ (6).png",
-  "DaIU/Trang chủ (7).png",
-  "DaIU/Trang chủ (8).png",
-  "DaIU/Trang chủ (9).png",
-  "DaIU/Trang chủ (10).png",
-  "DaIU/Trang chủ (11).png",
-  "DaIU/Trang chủ (12).png",
-  "DaIU/Trang chủ (13).png",
-  "DaIU/Trang chủ (14).png"
-];
-
-// Màu nhấn có thể tùy biến sau dựa trên ảnh nổi bật
-const brandColorOptions = ["#7aa2ff", "#9b9eff", "#7fffd4", "#ffb86b", "#ffd166"];
-
-function pickBrandColor(index) {
-  return brandColorOptions[index % brandColorOptions.length];
-}
-
 function setCSSVar(name, value) {
   document.documentElement.style.setProperty(name, value);
-}
-
-function createSection(src, index) {
-  const section = document.createElement("section");
-  section.className = "section";
-  section.id = `section-${index + 1}`;
-  section.setAttribute("aria-label", `Phần ${index + 1}`);
-
-  const frame = document.createElement("div");
-  frame.className = "frame";
-
-  const imgWrap = document.createElement("div");
-  imgWrap.className = "img-wrap";
-
-  const img = document.createElement("img");
-  img.loading = index <= 1 ? "eager" : "lazy"; // ảnh đầu tiên/tiếp theo ưu tiên
-  img.decoding = "async";
-  img.src = src;
-  img.alt = `Trang chủ - hình ${index + 1}`;
-
-  imgWrap.appendChild(img);
-  frame.appendChild(imgWrap);
-
-  const caption = document.createElement("p");
-  caption.className = "caption";
-  caption.textContent = `Hình ${index + 1} / ${daiUImages.length}`;
-
-  section.appendChild(frame);
-  section.appendChild(caption);
-  return section;
-}
-
-function buildDotNav(total) {
-  const container = document.getElementById("dotNav");
-  container.innerHTML = "";
-  for (let i = 0; i < total; i++) {
-    const btn = document.createElement("button");
-    btn.className = "dot-btn";
-    btn.setAttribute("aria-label", `Đi đến phần ${i + 1}`);
-    btn.addEventListener("click", () => {
-      document.getElementById(`section-${i + 1}`).scrollIntoView({ behavior: "smooth" });
-    });
-    container.appendChild(btn);
-  }
-}
-
-function highlightDot(index) {
-  const dots = document.querySelectorAll(".dot-btn");
-  dots.forEach((d, i) => d.classList.toggle("active", i === index));
-  setCSSVar("--brand", pickBrandColor(index));
-}
-
-function initScrollButtons() {
-  const up = document.getElementById("scrollUp");
-  const down = document.getElementById("scrollDown");
-  up.addEventListener("click", () => scrollByViewport(-1));
-  down.addEventListener("click", () => scrollByViewport(1));
-}
-
-function scrollByViewport(direction) {
-  const sections = [
-    ...document.querySelectorAll(".section")
-  ];
-  const current = getCurrentSectionIndex(sections);
-  const nextIndex = Math.min(
-    sections.length - 1,
-    Math.max(0, current + direction)
-  );
-  sections[nextIndex].scrollIntoView({ behavior: "smooth" });
-}
-
-function getCurrentSectionIndex(sections) {
-  const viewportCenter = window.scrollY + window.innerHeight / 2;
-  let closestIndex = 0;
-  let closestDistance = Infinity;
-  for (let i = 0; i < sections.length; i++) {
-    const rect = sections[i].getBoundingClientRect();
-    const center = rect.top + window.scrollY + rect.height / 2;
-    const dist = Math.abs(center - viewportCenter);
-    if (dist < closestDistance) {
-      closestDistance = dist;
-      closestIndex = i;
-    }
-  }
-  return closestIndex;
 }
 
 function initIntersectionAnimations() {
@@ -120,25 +9,23 @@ function initIntersectionAnimations() {
         entry.target.classList.add("visible");
       }
     });
-  }, {
-    threshold: 0.25
-  });
+  }, { threshold: 0.2 });
 
-  document.querySelectorAll(".frame").forEach((el) => observer.observe(el));
+  document.querySelectorAll(".feature, .card").forEach((el) => observer.observe(el));
 }
 
-function initActiveSectionObserver() {
-  const sections = document.querySelectorAll(".section");
+function initActiveNav() {
+  const links = Array.from(document.querySelectorAll('.nav-link'));
+  const sections = links.map((a) => document.querySelector(a.getAttribute('href'))).filter(Boolean);
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        const id = entry.target.id; // section-1 ...
-        const index = parseInt(id.split("-")[1], 10) - 1;
-        highlightDot(index);
+        links.forEach((l) => l.classList.remove('active'));
+        const link = links.find((l) => l.getAttribute('href') === `#${entry.target.id}`);
+        if (link) link.classList.add('active');
       }
     });
   }, { threshold: 0.6 });
-
   sections.forEach((s) => observer.observe(s));
 }
 
@@ -146,33 +33,104 @@ function initKeyboardNav() {
   window.addEventListener("keydown", (e) => {
     if (e.key === "ArrowDown" || e.key === "PageDown") {
       e.preventDefault();
-      scrollByViewport(1);
+      const next = document.querySelector("#about");
+      if (next) next.scrollIntoView({ behavior: "smooth" });
     } else if (e.key === "ArrowUp" || e.key === "PageUp") {
       e.preventDefault();
-      scrollByViewport(-1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   });
 }
 
-function init() {
-  const main = document.querySelector("main");
-  daiUImages.forEach((src, i) => {
-    const section = createSection(src, i);
-    main.appendChild(section);
-  });
-  buildDotNav(daiUImages.length);
-  initScrollButtons();
-  initIntersectionAnimations();
-  initActiveSectionObserver();
-  initKeyboardNav();
+function setSoftPinkTheme() {
+  setCSSVar("--brand", "#ff8ccf");
+}
 
+function init() {
+  initIntersectionAnimations();
+  initActiveNav();
+  initKeyboardNav();
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  // Đặt màu đầu tiên
-  highlightDot(0);
+  setSoftPinkTheme();
+  setBackgroundFromHeroImage();
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
+// ==== Background from hero image ====
+function rgbToHsl(r, g, b) {
+  r /= 255; g /= 255; b /= 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h, s, l = (max + min) / 2;
+  if (max === min) { h = s = 0; }
+  else {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+      case g: h = (b - r) / d + 2; break;
+      default: h = (r - g) / d + 4;
+    }
+    h /= 6;
+  }
+  return [h, s, l];
+}
+
+function hslToRgb(h, s, l) {
+  let r, g, b;
+  if (s === 0) { r = g = b = l; }
+  else {
+    const hue2rgb = (p, q, t) => {
+      if (t < 0) t += 1; if (t > 1) t -= 1;
+      if (t < 1/6) return p + (q - p) * 6 * t;
+      if (t < 1/2) return q;
+      if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+      return p;
+    };
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const p = 2 * l - q;
+    r = hue2rgb(p, q, h + 1/3);
+    g = hue2rgb(p, q, h);
+    b = hue2rgb(p, q, h - 1/3);
+  }
+  return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+}
+
+function clamp01(x) { return Math.max(0, Math.min(1, x)); }
+
+function setBackgroundFromHeroImage() {
+  const img = new Image();
+  img.crossOrigin = "anonymous";
+  img.src = "DaIU/Trang chủ.png";
+  img.decode().then(() => {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width = 40;
+    const h = canvas.height = 40;
+    ctx.drawImage(img, 0, 0, w, h);
+    const data = ctx.getImageData(0, 0, w, h).data;
+    let r = 0, g = 0, b = 0, n = 0;
+    for (let i = 0; i < data.length; i += 4) {
+      const rr = data[i], gg = data[i+1], bb = data[i+2], aa = data[i+3];
+      if (aa < 220) continue; // bỏ pixel quá trong suốt
+      r += rr; g += gg; b += bb; n++;
+    }
+    if (!n) return;
+    r = Math.round(r/n); g = Math.round(g/n); b = Math.round(b/n);
+    let [hH, sH, lH] = rgbToHsl(r, g, b);
+    // làm nền dịu và có chiều sâu
+    const l1 = clamp01(lH - 0.22);
+    const l2 = clamp01(lH + 0.06);
+    const s1 = clamp01(sH * 0.8);
+    const s2 = clamp01(sH * 0.6);
+    const [r1, g1, b1] = hslToRgb(hH, s1, l1);
+    const [r2, g2, b2] = hslToRgb(hH, s2, l2);
+    setCSSVar("--bg", `rgb(${r1}, ${g1}, ${b1})`);
+    setCSSVar("--bg-2", `rgb(${r2}, ${g2}, ${b2})`);
+  }).catch(() => {
+    // giữ màu mặc định nếu không đọc được ảnh
+  });
+}
 
 

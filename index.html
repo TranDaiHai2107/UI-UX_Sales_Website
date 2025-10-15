@@ -7,7 +7,10 @@
     <meta name="description" content="UI/UX Sales Website - Trang chủ với hiệu ứng mượt và hiện đại" />
 
     <!-- Preload ảnh đầu tiên để hiển thị nhanh -->
-    <link rel="preload" as="image" href="DaIU/Trang chủ.png" />
+    <!-- <link rel="preload" as="image" href="DaIU/Trang chủ.png" /> -->
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -15,32 +18,171 @@
     <a class="skip-link" href="#main">Bỏ qua điều hướng</a>
 
     <header class="site-header" role="banner" aria-label="Điều hướng chính">
-      <div class="brand">
-        <span class="logo" aria-hidden="true">●</span>
-        <span class="name">DaIU</span>
+      <div class="container header-inner">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">DaIU</div>
+        </div>
+        <nav class="site-nav" aria-label="Điều hướng trang">
+          <a class="nav-link" href="#hero">Trang chủ</a>
+          <a class="nav-link" href="#about">Giới thiệu</a>
+          <a class="nav-link" href="#services">Dịch vụ</a>
+          <a class="nav-link" href="#projects">Dự án</a>
+          <a class="nav-link" href="#contact">Liên hệ</a>
+        </nav>
       </div>
-      <nav class="site-nav" aria-label="Điều hướng trang">
-        <button id="scrollUp" class="nav-btn" aria-label="Lên trên">▲</button>
-        <button id="scrollDown" class="nav-btn" aria-label="Xuống dưới">▼</button>
-      </nav>
     </header>
 
-    <main id="main" class="main">
-      <!-- Sections sẽ được render bằng JS dựa trên danh sách ảnh trong DaIU -->
-      <noscript>
-        Vui lòng bật JavaScript để xem nội dung.
-      </noscript>
+    <main id="main">
+      <section id="hero" class="hero section">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <h1 class="hero-title">DỊCH VỤ THIẾT KẾ<br />UI CHUYÊN NGHIỆP</h1>
+            <p class="hero-sub">Nâng tầm giao diện & khẳng định phong cách thương hiệu của bạn!</p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#about">Xem thêm ↗</a>
+              <a class="btn btn-ghost" href="#contact">Liên hệ</a>
+            </div>
+            <div class="socials" aria-label="Mạng xã hội">
+              <a class="social fb" href="#" aria-label="Facebook" title="Facebook">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06C2 17.08 5.66 21.21 10.44 22v-7.01H7.9v-2.93h2.54V9.85c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.23 0-1.62.77-1.62 1.56v1.87h2.76l-.44 2.93h-2.32V22C18.34 21.21 22 17.08 22 12.06Z"/></svg>
+              </a>
+              <a class="social ig" href="#" aria-label="Instagram" title="Instagram">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7m5 3a5 5 0 1 1 0 10a5 5 0 0 1 0-10m0 2.2a2.8 2.8 0 1 0 0 5.6a2.8 2.8 0 0 0 0-5.6M18 6.5a1 1 0 1 1 0 2a1 1 0 0 1 0-2Z"/></svg>
+              </a>
+              <a class="social tt" href="#" aria-label="TikTok" title="TikTok">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M21 8.5v3.02a8.53 8.53 0 0 1-4.8-1.54v6.27a5.75 5.75 0 1 1-5.75-5.75c.25 0 .5.02.73.06v3.12a2.65 2.65 0 1 0 1.81 2.51V2.98h3.03a4.85 4.85 0 0 0 4.98 4.85Z"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="hero-art">
+            <img class="hero-graphic" src="image/Poster 1.png" alt="Hero minh họa thương hiệu" />
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="about section">
+        <div class="container">
+          <h2 class="section-title">TẠI SAO CHỌN DAIU?</h2>
+          <p class="lead">Giao diện <strong>chuyên nghiệp</strong> tạo ấn tượng thị giác và thể hiện đẳng cấp thương hiệu. DaIU chuyển hóa <strong>ý tưởng</strong> thành <strong>giao diện hiện đại</strong>, trực quan, đồng bộ – giúp doanh nghiệp khẳng định bản sắc và <strong>nâng tầm hình ảnh</strong> trên nền tảng số.</p>
+          <div class="features">
+            <div class="feature">
+              <div class="feature-icon">◎</div>
+              <h3 class="feature-title">Chuẩn thương hiệu</h3>
+              <p class="feature-desc">Màu sắc, kiểu chữ và lưới thiết kế thống nhất theo guideline.</p>
+            </div>
+            <div class="feature">
+              <div class="feature-icon">↗</div>
+              <h3 class="feature-title">Tối ưu trải nghiệm</h3>
+              <p class="feature-desc">Dễ dùng, dễ nhìn, dòng chảy thao tác mượt trên mọi thiết bị.</p>
+            </div>
+            <div class="feature">
+              <div class="feature-icon">★</div>
+              <h3 class="feature-title">Tinh tế & hiện đại</h3>
+              <p class="feature-desc">Hiệu ứng vừa phải, nhấn mạnh điểm quan trọng, không rối mắt.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="projects section">
+        <div class="container">
+          <h2 class="section-title">DỰ ÁN TIÊU BIỂU</h2>
+          <div class="grid-products">
+            <a class="product-card" href="#" aria-label="Inkspire">
+              <div class="media"><img src="image/1.png" alt="Inkspire" /></div>
+              <div class="overlay">
+                <h3>Inkspire</h3>
+                <p>Logo & Identity</p>
+              </div>
+            </a>
+            <a class="product-card" href="#" aria-label="Pure Botanics">
+              <div class="media"><img src="image/2.png" alt="Pure Botanics" /></div>
+              <div class="overlay">
+                <h3>Pure Botanics</h3>
+                <p>Landing Page</p>
+              </div>
+            </a>
+            <a class="product-card" href="#" aria-label="SynapseX">
+              <div class="media"><img src="image/3.png" alt="SynapseX" /></div>
+              <div class="overlay">
+                <h3>SynapseX</h3>
+                <p>App UI</p>
+              </div>
+            </a>
+            <a class="product-card" href="#" aria-label="Pets Care">
+              <div class="media"><img src="image/4.png" alt="Thú cưng" /></div>
+              <div class="overlay">
+                <h3>Pets Care</h3>
+                <p>Social Campaign</p>
+              </div>
+            </a>
+            <a class="product-card" href="#" aria-label="Clover">
+              <div class="media"><img src="image/5.png" alt="Cỏ bốn lá" /></div>
+              <div class="overlay">
+                <h3>Clover</h3>
+                <p>Illustration</p>
+              </div>
+            </a>
+            <a class="product-card" href="#" aria-label="Coffee Brand">
+              <div class="media"><img src="image/6.png" alt="Cà phê" /></div>
+              <div class="overlay">
+                <h3>Coffee Brand</h3>
+                <p>Brand Visual</p> 
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+      <section id="showreel" class="showreel section">
+        <div class="container">
+          <div class="video-frame">
+            <video class="video" src="image/7120350830604.mp4"  controls playsinline preload="metadata"></video>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" class="services section">
+        <div class="container">
+          <h2 class="section-title">DỊCH VỤ</h2>
+          <div class="service-grid">
+            <div class="grid-services">
+              <a class="service-card" href="#" aria-label="Website">
+                <div class="media"><img src="image/7.jpg" alt="Website" /></div>
+                <div class="overlay"><h3>Website</h3></div>
+              </a>
+              <a class="service-card" href="#" aria-label="Portfolio & Branding">
+                <div class="media"><img src="image/8.png" alt="Portfolio & Branding" /></div>
+                <div class="overlay"><h3>Portfolio & Branding</h3></div>
+              </a>
+              <a class="service-card" href="#" aria-label="Profile & Catalogue">
+                <div class="media"><img src="image/9.jpg" alt="Profile & Catalogue" /></div>
+                <div class="overlay"><h3>Profile & Catalogue</h3></div>
+              </a>
+              <a class="service-card" href="#" aria-label="Marketing">
+                <div class="media"><img src="image/10.png" alt="Marketing" /></div>
+                <div class="overlay"><h3>Marketing</h3></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
+
+      <section id="contact" class="cta section">
+        <div class="container cta-inner">
+          <h3>Sẵn sàng nâng cấp giao diện của bạn?</h3>
+          <a class="btn btn-primary" href="#">Liên hệ ngay</a>
+        </div>
+      </section>
     </main>
 
-    <!-- Điều hướng chấm -->
-    <div class="dot-nav" aria-label="Điều hướng theo phần" role="navigation" id="dotNav"></div>
-
     <footer class="site-footer" role="contentinfo">
-      <p>© <span id="year"></span> DaIU. All rights reserved.</p>
+      <div class="container">
+        <p>© <span id="year"></span> DaIU. All rights reserved.</p>
+      </div>
     </footer>
 
     <script defer src="script.js"></script>
   </body>
   </html>
-
-
