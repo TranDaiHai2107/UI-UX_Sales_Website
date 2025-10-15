@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DaIU - Trang chủ</title>
+    <meta name="description" content="UI/UX Sales Website - Trang chủ với hiệu ứng mượt và hiện đại" />
+
+    <!-- Preload ảnh đầu tiên để hiển thị nhanh -->
+    <link rel="preload" as="image" href="DaIU/Trang chủ.png" />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Bỏ qua điều hướng</a>
+
+    <header class="site-header" role="banner" aria-label="Điều hướng chính">
+      <div class="brand">
+        <span class="logo" aria-hidden="true">●</span>
+        <span class="name">DaIU</span>
+      </div>
+      <nav class="site-nav" aria-label="Điều hướng trang">
+        <button id="scrollUp" class="nav-btn" aria-label="Lên trên">▲</button>
+        <button id="scrollDown" class="nav-btn" aria-label="Xuống dưới">▼</button>
+      </nav>
+    </header>
+
+    <main id="main" class="main">
+      <!-- Sections sẽ được render bằng JS dựa trên danh sách ảnh trong DaIU -->
+      <noscript>
+        Vui lòng bật JavaScript để xem nội dung.
+      </noscript>
+    </main>
+
+    <!-- Điều hướng chấm -->
+    <div class="dot-nav" aria-label="Điều hướng theo phần" role="navigation" id="dotNav"></div>
+
+    <footer class="site-footer" role="contentinfo">
+      <p>© <span id="year"></span> DaIU. All rights reserved.</p>
+    </footer>
+
+    <script defer src="script.js"></script>
+  </body>
+  </html>
+
+
