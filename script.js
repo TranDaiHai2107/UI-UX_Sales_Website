@@ -2,38 +2,51 @@ function setCSSVar(name, value) {
   document.documentElement.style.setProperty(name, value);
 }
 
+// ===== Reveal & Section visibility =====
 function initIntersectionAnimations() {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const observer = new IntersectionObserver((entries, obs) => {
+
+  // Element-level reveal (cards, items, etc.)
+  const itemObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
+      const el = entry.target;
       if (entry.isIntersecting) {
-        const el = entry.target;
-        // Support stagger via data-index
         const idx = Number(el.getAttribute('data-idx') || 0);
-        const delay = idx * (Number(getComputedStyle(document.documentElement).getPropertyValue('--reveal-delay-step')) || 70);
+        const delay = idx * 70;
         if (!reduce && delay) el.style.transitionDelay = `${delay}ms`;
         el.classList.add('revealed', 'visible');
-        obs.unobserve(el);
+      } else {
+        el.classList.remove('revealed', 'visible');
+        el.style.transitionDelay = '';
       }
     });
   }, { threshold: 0.18 });
 
-  const toReveal = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-zoom, .feature, .product-card, .service-card, .tc-item, .explore-card, .cta-inner, .follow-inner');
-  toReveal.forEach((el, i) => { el.setAttribute('data-idx', String(i % 10)); observer.observe(el); });
+  const toReveal = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-zoom, .feature, .product-card, .service-card, .tc-item, .explore-card, .cta-inner');
+  toReveal.forEach((el, i) => { el.setAttribute('data-idx', String(i % 10)); itemObserver.observe(el); });
+
+  // Section-level active state for nav and transitions
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const section = entry.target;
+      if (entry.isIntersecting) section.classList.add('section-inview');
+      else section.classList.remove('section-inview');
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('section.section').forEach((s) => sectionObserver.observe(s));
 }
 
+// ===== Lightweight parallax (hero only) =====
 function initParallax() {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce) return;
   const hero = document.querySelector('.hero-graphic');
-  const follow = document.querySelector('.follow-hero');
   let ticking = false;
   const onScroll = () => {
     if (ticking) return; ticking = true;
     requestAnimationFrame(() => {
       const y = window.scrollY || 0;
-      if (hero) hero.style.transform = `translateY(${y * -0.05}px) scale(1.1)`;
-      if (follow) follow.style.backgroundPositionY = `${50 + y * -0.02}%`;
+      if (hero) hero.style.transform = `translateY(${y * -0.03}px) scale(1.06)`;
       ticking = false;
     });
   };
@@ -72,6 +85,7 @@ function setSoftPinkTheme() {
   setCSSVar("--brand", "#ff8ccf");
 }
 
+// ===== Color helpers (sampling) =====
 function rgbToHsl(r, g, b) {
   r /= 255; g /= 255; b /= 255;
   const max = Math.max(r, g, b), min = Math.min(r, g, b);
@@ -221,6 +235,15 @@ function setBackgroundFromHeroImage() {
   });
 }
 
+// ===== Gift glow (hero special) =====
+function initGiftGlow() {
+  // target element should have [data-gift] attribute
+  const gift = document.querySelector('[data-gift]');
+  if (!gift) return;
+  gift.addEventListener('pointerenter', () => gift.classList.add('glow'));
+  gift.addEventListener('pointerleave', () => gift.classList.remove('glow'));
+}
+
 async function init() {
   initIntersectionAnimations();
   initActiveNav();
@@ -230,6 +253,7 @@ async function init() {
   setSoftPinkTheme();
   await setBackgroundFromDaIUImages();
   initParallax();
+  initGiftGlow();
 }
 
 document.addEventListener("DOMContentLoaded", init);

@@ -202,15 +202,13 @@ body {
 
 /* --- Follow banner --- */
 .follow { padding-top: 0; padding-bottom: 0; }
-.follow-hero { position: relative; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); }
-.follow-hero::before { content: ""; display: block; padding-top: 60vh; }
-.follow-hero { background: url("image/15.jpeg") center/cover no-repeat; }
+.follow-hero { position: relative; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); min-height: 60vh; background: url("image/15.jpeg") center/cover no-repeat; }
 .follow-inner { position: absolute; inset: 0; display: grid; align-content: center; gap: 1rem; }
 .follow-title { color: #fff; font-family: "Playfair Display", serif; font-weight: 900; font-size: clamp(2rem, 1.4rem + 3vw, 3.5rem); line-height: 1.15; text-shadow: 0 2px 12px rgba(0,0,0,.35); }
 .follow-link { color: #fff; font-weight: 800; text-decoration: underline; text-underline-offset: 6px; font-size: clamp(1.1rem, 1rem + .5vw, 1.4rem); }
 
 @media (max-width: 900px) {
-  .follow-hero::before { padding-top: 50vh; }
+  .follow-hero { min-height: 50vh; }
 }
 
 /* --- appended: theme unification and animations --- */
@@ -286,4 +284,12 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .reveal, .reveal-left, .reveal-right, .reveal-zoom { opacity: 1; transform: none; }
 }
+
+/* Section in-view transition */
+.section { transition: opacity 500ms ease, transform 500ms ease; }
+.section:not(.section-inview) { opacity: 0.92; transform: translateY(6px); }
+
+/* Gift glow effect */
+[data-gift] { position: relative; }
+[data-gift].glow { filter: drop-shadow(0 0 18px rgba(255,140,207,.65)) saturate(1.1); }
 
