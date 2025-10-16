@@ -3,15 +3,41 @@ function setCSSVar(name, value) {
 }
 
 function initIntersectionAnimations() {
-  const observer = new IntersectionObserver((entries) => {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
+        const el = entry.target;
+        // Support stagger via data-index
+        const idx = Number(el.getAttribute('data-idx') || 0);
+        const delay = idx * (Number(getComputedStyle(document.documentElement).getPropertyValue('--reveal-delay-step')) || 70);
+        if (!reduce && delay) el.style.transitionDelay = `${delay}ms`;
+        el.classList.add('revealed', 'visible');
+        obs.unobserve(el);
       }
     });
-  }, { threshold: 0.2 });
+  }, { threshold: 0.18 });
 
-  document.querySelectorAll(".feature, .card").forEach((el) => observer.observe(el));
+  const toReveal = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-zoom, .feature, .product-card, .service-card, .tc-item, .explore-card, .cta-inner, .follow-inner');
+  toReveal.forEach((el, i) => { el.setAttribute('data-idx', String(i % 10)); observer.observe(el); });
+}
+
+function initParallax() {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+  const hero = document.querySelector('.hero-graphic');
+  const follow = document.querySelector('.follow-hero');
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY || 0;
+      if (hero) hero.style.transform = `translateY(${y * -0.05}px) scale(1.1)`;
+      if (follow) follow.style.backgroundPositionY = `${50 + y * -0.02}%`;
+      ticking = false;
+    });
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
 }
 
 function initActiveNav() {
@@ -46,19 +72,6 @@ function setSoftPinkTheme() {
   setCSSVar("--brand", "#ff8ccf");
 }
 
-function init() {
-  initIntersectionAnimations();
-  initActiveNav();
-  initKeyboardNav();
-  const yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-  setSoftPinkTheme();
-  setBackgroundFromHeroImage();
-}
-
-document.addEventListener("DOMContentLoaded", init);
-
-// ==== Background from hero image ====
 function rgbToHsl(r, g, b) {
   r /= 255; g /= 255; b /= 255;
   const max = Math.max(r, g, b), min = Math.min(r, g, b);
@@ -99,6 +112,81 @@ function hslToRgb(h, s, l) {
 
 function clamp01(x) { return Math.max(0, Math.min(1, x)); }
 
+// === Palette sampling from DaIU images ===
+async function averageColorsFromImages(paths) {
+  const samples = [];
+  for (const src of paths) {
+    try {
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.src = src;
+      // decode can throw if file not found; wrap in await
+      await img.decode();
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      const w = canvas.width = 24; // tiny for speed
+      const h = canvas.height = 24;
+      ctx.drawImage(img, 0, 0, w, h);
+      const data = ctx.getImageData(0, 0, w, h).data;
+      let r = 0, g = 0, b = 0, n = 0;
+      for (let i = 0; i < data.length; i += 4) {
+        const aa = data[i+3];
+        if (aa < 200) continue;
+        r += data[i]; g += data[i+1]; b += data[i+2]; n++;
+      }
+      if (n) {
+        samples.push([Math.round(r/n), Math.round(g/n), Math.round(b/n)]);
+      }
+    } catch (e) {
+      // ignore missing images
+    }
+  }
+  if (!samples.length) return null;
+  let r=0,g=0,b=0;
+  samples.forEach(([rr,gg,bb])=>{ r+=rr; g+=gg; b+=bb; });
+  r = Math.round(r / samples.length);
+  g = Math.round(g / samples.length);
+  b = Math.round(b / samples.length);
+  return [r,g,b];
+}
+
+async function setBackgroundFromDaIUImages() {
+  const base = "DaIU/";
+  const files = [
+    "Trang chủ.png",
+    "Trang chủ (2).png",
+    "Trang chủ (3).png",
+    "Trang chủ (4).png",
+    "Trang chủ (5).png",
+    "Trang chủ (6).png",
+    "Trang chủ (7).png",
+    "Trang chủ (8).png",
+    "Trang chủ (9).png",
+    "Trang chủ (10).png",
+    "Trang chủ (11).png",
+    "Trang chủ (12).png",
+    "Trang chủ (13).png",
+    "Trang chủ (14).png"
+  ].map(f => base + f);
+
+  const avg = await averageColorsFromImages(files);
+  if (!avg) return;
+  const [r, g, b] = avg;
+  let [hH, sH, lH] = rgbToHsl(r, g, b);
+  // Derive three stops along one hue for a global vertical gradient
+  const stops = [
+    { s: clamp01(sH * 0.9),  l: clamp01(lH * 0.5) }, // top darker
+    { s: clamp01(sH * 0.85), l: clamp01(lH * 0.65) }, // mid
+    { s: clamp01(sH * 0.75), l: clamp01(Math.min(0.88, lH + 0.18)) } // bottom lighter
+  ].map(({s,l}) => hslToRgb(hH, s, l));
+  const [tR,tG,tB] = stops[0];
+  const [mR,mG,mB] = stops[1];
+  const [bR,bG,bB] = stops[2];
+  setCSSVar("--bg", `rgb(${tR}, ${tG}, ${tB})`);
+  setCSSVar("--bg-mid", `rgb(${mR}, ${mG}, ${mB})`);
+  setCSSVar("--bg-2", `rgb(${bR}, ${bG}, ${bB})`);
+}
+
 function setBackgroundFromHeroImage() {
   const img = new Image();
   img.crossOrigin = "anonymous";
@@ -132,5 +220,18 @@ function setBackgroundFromHeroImage() {
     // giữ màu mặc định nếu không đọc được ảnh
   });
 }
+
+async function init() {
+  initIntersectionAnimations();
+  initActiveNav();
+  initKeyboardNav();
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  setSoftPinkTheme();
+  await setBackgroundFromDaIUImages();
+  initParallax();
+}
+
+document.addEventListener("DOMContentLoaded", init);
 
 
