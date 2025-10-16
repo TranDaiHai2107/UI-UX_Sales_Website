@@ -340,3 +340,189 @@ body {
 [data-gift] { position: relative; }
 [data-gift].glow { filter: drop-shadow(0 0 18px rgba(255,140,207,.65)) saturate(1.1); }
 
+/* --- Bổ sung cho trang Giới thiệu --- */
+.text-center {
+  text-align: center;
+}
+
+.section-subtitle {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.8rem, 1.5rem + 1.5vw, 2.5rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.about-page .container {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem; /* Khoảng cách giữa các phần */
+}
+
+/* Welcome Section */
+.about-welcome .welcome-title {
+  color: var(--brand);
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.5rem, 2rem + 2.5vw, 4rem);
+  font-weight: 900;
+  margin-bottom: 1rem;
+}
+.about-welcome .lead {
+  max-width: 75ch;
+  margin: 0 auto;
+}
+
+/* Overview Section */
+.about-overview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+.overview-art img {
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Mission & Vision Section */
+.about-mission-vision {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+.mission-card, .vision-card {
+  padding: 2rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+
+/* Timeline Section */
+.about-timeline {
+  position: relative;
+  padding-bottom: 2rem;
+}
+.timeline-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.timeline-item {
+  position: relative;
+}
+.timeline-image {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.timeline-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.timeline-item:hover .timeline-image img {
+  transform: scale(1.15); /* Hiệu ứng zoom khi hover */
+}
+.timeline-line {
+  position: relative;
+  width: 80%;
+  height: 2px;
+  background-color: rgba(255,255,255,0.3);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.timeline-dot {
+  width: 14px;
+  height: 14px;
+  background-color: var(--fg);
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+}
+
+/* Team Section */
+.about-team {
+  background-color: rgba(255, 140, 207, 0.1); /* Màu hồng nhạt */
+  padding: 3rem 0;
+  border: 2px solid var(--brand);
+  border-radius: var(--radius);
+  margin: 0 -4rem; /* Mở rộng ra khỏi container một chút */
+}
+.team-slider {
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 3rem; /* Thêm không gian cho pagination */
+}
+.team-card {
+  background: #fff;
+  border: 2px solid #e0bde3; /* Màu viền tím nhạt */
+  border-radius: 10px;
+  width: 250px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+}
+
+.team-card-header {
+  background: #fcecfc; /* Màu hồng rất nhạt cho header */
+  padding: 3px 0;
+  text-align: center;
+  color: #c78bc9; /* Màu tím cho các icon */
+  font-size: 14px;
+  line-height: 1;
+  border-bottom: 2px solid #e0bde3;
+}
+
+.team-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.swiper-pagination-bullet-active {
+  background: var(--brand) !important;
+}
+
+/* CTA Banner */
+.about-cta-banner {
+  background: url('https://i.postimg.cc/L5K5kXN4/cta-background.jpg') center/cover no-repeat;
+  padding: 5rem 0;
+  text-align: center;
+  color: #111;
+}
+.cta-content {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  padding: 2rem;
+  border-radius: var(--radius);
+  display: inline-block;
+}
+.cta-content h2 {
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
+}
+.cta-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: #d33a6a;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .about-overview, .about-mission-vision {
+    grid-template-columns: 1fr;
+  }
+  .about-team {
+    margin: 0;
+  }
+}
+

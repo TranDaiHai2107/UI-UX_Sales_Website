@@ -64,7 +64,7 @@ function initActiveNav() {
         if (link) link.classList.add('active');
       }
     });
-  }, { threshold: 0.6 });
+  }, { threshold: 0.2 });
   sections.forEach((s) => observer.observe(s));
 }
 
@@ -254,6 +254,36 @@ async function init() {
   await setBackgroundFromDaIUImages();
   initParallax();
   initGiftGlow();
+
+  // ----- BẮT ĐẦU ĐOẠN MÃ MỚI -----
+  // Khởi tạo Team Slider
+  const swiper = new Swiper('.team-slider', {
+    loop: true,
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+    slidesPerView: 2,
+    spaceBetween: 20,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+      768: {
+        slidesPerView: 4,
+        spaceBetween: 30,
+      },
+      1024: {
+        slidesPerView: 5,
+        spaceBetween: 30,
+      },
+    },
+  });
 }
 
 document.addEventListener("DOMContentLoaded", init);
