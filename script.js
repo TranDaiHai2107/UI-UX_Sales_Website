@@ -22,7 +22,13 @@ function initIntersectionAnimations() {
     });
   }, { threshold: 0.18 });
 
-  const toReveal = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-zoom, .feature, .product-card, .service-card, .tc-item, .explore-card, .cta-inner');
+  // const toReveal = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-zoom, .feature, .product-card, .service-card, .tc-item, .explore-card, .cta-inner');
+  const toReveal = document.querySelectorAll(
+    '.reveal, .reveal-left, .reveal-right, .reveal-zoom,' +
+    ' .feature, .product-card, .service-card, .tc-item, .explore-card, .cta-inner,' +
+    ' .process-intro, .process-steps, .process-step, .timeline-list, .timeline-item,' +
+    ' .contact-cta, .contact-form, .contact-left, .contact-right, .team-slider, .testimonials-card, .section-title.text-center'
+  );
   toReveal.forEach((el, i) => { el.setAttribute('data-idx', String(i % 10)); itemObserver.observe(el); });
 
   // Section-level active state for nav and transitions
@@ -289,3 +295,65 @@ async function init() {
 document.addEventListener("DOMContentLoaded", init);
 
 
+// Lightweight contact form handler (front-end only)
+(function contactFormHandler() {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  const feedback = form.querySelector('.form-feedback');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+
+    // basic validation
+    if (!name || !email || !message) {
+      feedback.textContent = 'Vui lòng điền đầy đủ thông tin.';
+      feedback.style.color = '#b91c1c';
+      return;
+    }
+
+    feedback.textContent = 'Đang gửi...';
+    feedback.style.color = '#111';
+
+    // simulate submission (replace with real endpoint)
+    try {
+      await new Promise(res => setTimeout(res, 900));
+      feedback.textContent = 'Cảm ơn! Chúng tôi đã nhận được tin nhắn. DaIU sẽ liên hệ bạn sớm.';
+      feedback.style.color = '#0b6623';
+      form.reset();
+    } catch (err) {
+      feedback.textContent = 'Có lỗi xảy ra. Vui lòng thử lại.';
+      feedback.style.color = '#b91c1c';
+    }
+  });
+})();
+
+// ...existing code...
+(function initResponsiveNav() {
+  const btn = document.getElementById('nav-toggle');
+  const nav = document.getElementById('site-nav');
+  if (!btn || !nav) return;
+
+  function setOpen(open) {
+    document.body.classList.toggle('nav-open', open);
+    btn.setAttribute('aria-expanded', String(!!open));
+    btn.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu');
+  }
+
+  btn.addEventListener('click', () => setOpen(!document.body.classList.contains('nav-open')));
+  // close on link click
+  nav.querySelectorAll('.nav-link').forEach(a => a.addEventListener('click', () => setOpen(false)));
+  // close on Escape
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  // optional: click outside to close
+  document.addEventListener('click', (e) => {
+    if (!document.body.classList.contains('nav-open')) return;
+    if (nav.contains(e.target) || btn.contains(e.target)) return;
+    setOpen(false);
+  });
+})();
+  
+// ...existing code...

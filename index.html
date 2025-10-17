@@ -14,14 +14,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/png" href="image/Daiu_icon.ico" />
   </head>
   <body>
     <a class="skip-link" href="#main">Bỏ qua điều hướng</a>
 
-    <header class="site-header" role="banner" aria-label="Điều hướng chính">
+    <!-- <header class="site-header" role="banner" aria-label="Điều hướng chính">
       <div class="container header-inner">
         <div class="brand">
-          <div class="brand-mark" aria-hidden="true">DaIU</div>
+          <div class="brand-mark" aria-hidden="true"></div>
         </div>
         <nav class="site-nav" aria-label="Điều hướng trang">
           <a class="nav-link" href="#hero">Trang chủ</a>
@@ -30,10 +31,33 @@
           <a class="nav-link" href="#projects">Dự án</a>
           <a class="nav-link" href="#process">Quy trình</a>
           <a class="nav-link" href="#explore">Khám phá</a>
+          <a class="nav-link" href="#contact">Liên hệ</a>
+        </nav>
+      </div>
+    </header> -->
+    <header class="site-header" role="banner" aria-label="Điều hướng chính">
+      <div class="container header-inner">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true"></div>
+        </div>
 
+        <!-- mobile toggle -->
+        <button class="hamburger" id="nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Mở menu">
+          <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+        </button>
+
+        <nav id="site-nav" class="site-nav" aria-label="Điều hướng trang">
+          <a class="nav-link" href="#hero">Trang chủ</a>
+          <a class="nav-link" href="#about">Giới thiệu</a>
+          <a class="nav-link" href="#services">Dịch vụ</a>
+          <a class="nav-link" href="#projects">Dự án</a>
+          <a class="nav-link" href="#process">Quy trình</a>
+          <a class="nav-link" href="#explore">Khám phá</a>
+          <a class="nav-link" href="#contact">Liên hệ</a>
         </nav>
       </div>
     </header>
+
 
     <main id="main">
       <section id="hero" class="hero section">
@@ -42,7 +66,7 @@
             <h1 class="hero-title">DỊCH VỤ THIẾT KẾ<br />UI CHUYÊN NGHIỆP</h1>
             <p class="hero-sub">Nâng tầm giao diện & khẳng định phong cách thương hiệu của bạn!</p>
             <div class="cta-row">
-              <a class="btn btn-primary" href="#about">Xem thêm ↗</a>
+              <a class="btn btn-primary" href="#about">Xem thêm</a>
               <a class="btn btn-ghost" href="#contact">Liên hệ</a>
             </div>
             <div class="socials" aria-label="Mạng xã hội">
@@ -324,7 +348,137 @@
         </div>
       </div>
     </section> 
+      <section id="process" class="process section">
+        <div class="container">
+          <h2 class="section-title text-center" style="font-family: Playfair Display, serif;">QUY TRÌNH LÀM VIỆC</h2>
+          <div class="process-intro">
+            <div class="intro-copy">
+              <h3 class="intro-head">MINH BẠCH - TỐI ƯU - CHẤT LƯỢNG</h3>
+              <p class="intro-lead">DaIU vận hành theo quy trình làm việc chuẩn hóa, đảm bảo tính minh bạch, sự tham gia của khách hàng và tối ưu hóa thời gian triển khai. Chúng tôi cam kết bàn giao sản phẩm UI hoàn chỉnh, dễ dàng mở rộng và sẵn sàng cho giai đoạn lập trình.</p>
+            </div>
 
+          <div class="process-timeline">
+            <ol class="timeline-list" aria-hidden="false">
+              <li class="timeline-item">
+                <div class="timeline-number">01</div>
+                <div class="timeline-dot" aria-hidden="true"></div>
+                <div class="timeline-body">
+                  <h4>Tiếp nhận</h4>
+                  <p>Thu thập yêu cầu, xác định phạm vi và mục tiêu dự án.</p>
+                </div>
+              </li>
+              <li class="timeline-item">
+                <div class="timeline-number">02</div>
+                <div class="timeline-dot" aria-hidden="true"></div>
+                <div class="timeline-body">
+                  <h4>Thảo luận</h4>
+                  <p>Làm việc chuyên sâu với khách hàng để định hình trải nghiệm người dùng.</p>
+                </div>
+              </li>
+              <li class="timeline-item">
+                <div class="timeline-number">03</div>
+                <div class="timeline-dot" aria-hidden="true"></div>
+                <div class="timeline-body">
+                  <h4>Thiết kế</h4>
+                  <p>Wireframe, prototype và hoàn thiện visual UI.</p>
+                </div>
+              </li>
+              <li class="timeline-item">
+                <div class="timeline-number">04</div>
+                <div class="timeline-dot" aria-hidden="true"></div>
+                <div class="timeline-body">
+                  <h4>Lập trình</h4>
+                  <p>Hỗ trợ dev, chuẩn hoá spec để hiện thực hoá giao diện.</p>
+                </div>
+              </li>
+              <li class="timeline-item">
+                <div class="timeline-number">05</div>
+                <div class="timeline-dot" aria-hidden="true"></div>
+                <div class="timeline-body">
+                  <h4>Bàn giao</h4>
+                  <p>Gửi file Figma / HTML / CSS và tài nguyên đầy đủ.</p>
+                </div>
+              </li>
+              <li class="timeline-item">
+                <div class="timeline-number">06</div>
+                <div class="timeline-dot" aria-hidden="true"></div>
+                <div class="timeline-body">
+                  <h4>Hỗ trợ</h4>
+                  <p>Hỗ trợ chỉnh sửa, bảo hành sau triển khai.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+          </div>
+          <div class="process-steps">
+            <article class="process-step">
+              <div class="step-content">
+                <div class="step-number" aria-hidden="true">1</div>
+                <h3 class="step-title">Tiếp nhận yêu cầu</h3>
+                <p class="step-desc">Chúng tôi bắt đầu bằng việc thu thập và phân tích các tài liệu đầu vào từ khách hàng (tóm tắt dự án, yêu cầu chức năng, mục tiêu kinh doanh). Mục tiêu của giai đoạn này là xác định rõ ràng phạm vi công việc, các yêu cầu kỹ thuật cần thiết và lập kế hoạch tổng thể cho dự án.</p>
+              </div>
+              <div class="step-media">
+                <img src="image/Process_img/step_1.png" alt="Tiếp nhận yêu cầu">
+              </div>
+            </article>
+
+            <article class="process-step">
+              <div class="step-media">
+                <img src="image/Process_img/step_2.png" alt="Thảo luận chuyên sâu">
+              </div>
+              <div class="step-content">
+                <div class="step-number" aria-hidden="true">2</div>
+                <h3 class="step-title">Thảo luận Chuyên sâu</h3>
+                <p class="step-desc">Đây là bước chiến lược quan trọng. DaIU tổ chức các buổi làm việc chuyên sâu để làm rõ đối tượng người dùng, phân tích hành trình trải nghiệm của họ và xây dựng cấu trúc thông tin cho sản phẩm. Việc này đảm bảo mọi quyết định thiết kế đều được đặt nền tảng trên mục tiêu kinh doanh và sự tối ưu hóa cho người dùng cuối.</p>
+              </div>
+            </article>
+
+            <article class="process-step">
+              <div class="step-content">
+                <div class="step-number" aria-hidden="true">3</div>
+                <h3 class="step-title">Thiết kế</h3>
+                <p class="step-desc">Dựa trên cấu trúc đã chốt, chúng tôi tiến hành xây dựng giao diện người dùng. Quy trình bao gồm việc phác thảo khung sườn chức năng, tạo nguyên mẫu tương tác, và sau đó là phát triển giao diện hoàn chỉnh với độ thẩm mỹ cao. Chúng tôi luôn tuân thủ nguyên tắc nhất quán về màu sắc, kiểu chữ và thành phần giao diện để đảm bảo khả năng mở rộng của sản phẩm.</p>
+              </div>
+              <div class="step-media">
+                <img src="image/Process_img/step_3.png" alt="Thiết kế">
+              </div>
+            </article>
+
+            <article class="process-step">
+              <div class="step-media">
+                <img src="image/Process_img/step_4.png" alt="Lập trình" >
+              </div>
+              <div class="step-content">
+                <div class="step-number" aria-hidden="true">4</div>
+                <h3 class="step-title">Lập trình</h3>
+                <p class="step-desc">DaIU chủ động hỗ trợ đội ngũ phát triển (developer) của khách hàng trong quá trình triển khai. Chúng tôi cung cấp các hướng dẫn chi tiết về thông số kỹ thuật, tương tác, và giải đáp thắc mắc để đảm bảo giao diện được mã hóa chính xác theo thiết kế gốc, đồng thời tối ưu hóa hiệu suất tải và hiển thị.</p>
+              </div>
+            </article>
+
+            <article class="process-step">
+              <div class="step-content">
+                <div class="step-number" aria-hidden="true">5</div>
+                <h3 class="step-title">Bàn giao file chuẩn (Figma/HTML/CSS)</h3>
+                <p class="step-desc">Sau khi sản phẩm được khách hàng phê duyệt cuối cùng, chúng tôi thực hiện bàn giao đầy đủ tài sản. Tài sản bao gồm file nguồn thiết kế gốc với cấu trúc rõ ràng (thường là Figma). Tùy theo thỏa thuận, chúng tôi sẽ bàn giao thêm mã nguồn giao diện đã được mã hóa (HTML/CSS) và toàn bộ tài nguyên hình ảnh, biểu tượng.</p>
+              </div>
+              <div class="step-media">
+                <img src="image/Process_img/step_5.png" alt="Bàn giao">
+              </div>
+            </article>
+
+            <article class="process-step">
+              <div class="step-media">
+                <img src="image/Process_img/step_6.png" alt="Hỗ trợ">
+              </div>
+              <div class="step-content">
+                <div class="step-number" aria-hidden="true">6</div>
+                <h3 class="step-title">Hỗ trợ chỉnh sửa</h3>
+                <p class="step-desc">DaIU duy trì trách nhiệm hỗ trợ sau triển khai bằng việc cung cấp giai đoạn bảo hành và xử lý các lỗi kỹ thuật hoặc các yêu cầu điều chỉnh nhỏ phát sinh sau khi sản phẩm đã chính thức hoạt động. Mục tiêu là đảm bảo sự ổn định và hỗ trợ khách hàng trong những bước phát triển tiếp theo.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
       <!-- Explore -->
       <section id="explore" class="explore section" aria-labelledby="explore-title">
         <div class="container explore-grid">
@@ -359,7 +513,39 @@
           </div>
         </div>
       </section>
+      <section id="contact" class="contact-cta section">
+        <div class="container contact-grid">
+          <div class="contact-left">
+            <h2 class="contact-title">Bạn đã sẵn sàng<br>khởi động dự án của mình?</h2>
+            <p class="contact-sub">Tồn tại ý tưởng — chúng tôi chuyển hoá thành giao diện chuyên nghiệp. Gửi thông tin, đội ngũ DaIU sẽ liên hệ trong 24 giờ.</p>
+          </div>
 
+          <div class="contact-right" aria-labelledby="contact-form">
+            <form id="contact-form" class="contact-form" novalidate>
+              <div class="form-row">
+                <label for="c-name">Họ &amp; Tên</label>
+                <input id="c-name" name="name" type="text" required />
+              </div>
+
+              <div class="form-row">
+                <label for="c-email">Email</label>
+                <input id="c-email" name="email" type="email" required />
+              </div>
+
+              <div class="form-row">
+                <label for="c-message">Nội dung</label>
+                <textarea id="c-message" name="message" rows="6" required></textarea>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Gửi</button>
+              </div>
+
+              <div class="form-feedback" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+        </div>
+      </section>
   <footer class="site-footer" aria-label="Thông tin Lazada">
     <div class="footer-top">
       <div class="footer-highlight">
@@ -368,11 +554,11 @@
       </div>
       <div class="footer-highlight">
         <div class="icon">🚚</div>
-        <div class="text"><div class="title" data-i18n="Giao hàng nhanh">Giao hàng nhanh</div><div class="sub" data-i18n="Toàn quốc, theo dõi đơn dễ dàng">Toàn quốc, theo dõi đơn dễ dàng</div></div>
+        <div class="text"><div class="title" data-i18n="Giao hàng nhanh">Hoàn thiện nhanh</div><div class="sub" data-i18n="Toàn quốc, theo dõi đơn dễ dàng">Nhanh chóng, tiết kiệm, chính xác</div></div>
       </div>
       <div class="footer-highlight">
         <div class="icon">↩️</div>
-        <div class="text"><div class="title" data-i18n="Đổi trả linh hoạt">Đổi trả linh hoạt</div><div class="sub" data-i18n="Miễn phí trong 15 ngày">Miễn phí trong 15 ngày</div></div>
+        <div class="text"><div class="title" data-i18n="Đổi trả linh hoạt">Hỗ trợ chỉnh sửa</div><div class="sub" data-i18n="Miễn phí trong 15 ngày">Miễn phí trong 15 ngày</div></div>
       </div>
       <div class="footer-highlight">
         <div class="icon">🔒</div>
@@ -390,19 +576,19 @@
         </ul>
       </div>
       <div class="footer-col">
-        <div class="col-title" data-i18n="Về Lazada">Về Lazada</div>
+        <div class="col-title" data-i18n="Về Lazada">Về Daiu</div>
         <ul>
           <li><a href="#" data-i18n="Giới thiệu">Giới thiệu</a></li>
           <li><a href="#" data-i18n="Tuyển dụng">Tuyển dụng</a></li>
           <li><a href="#" data-i18n="Điều khoản sử dụng">Điều khoản sử dụng</a></li>
           <li><a href="#" data-i18n="Bảo mật thông tin">Bảo mật thông tin</a></li>
-          <li><a href="#" data-i18n="ĐÂY LÀ ĐỒ ÁN MÔN HỌC, KHÔNG SỬ DỤNG VỚI MỤC ĐÍCH THƯƠNG MẠI">ĐÂY LÀ ĐỒ ÁN MÔN HỌC, KHÔNG SỬ DỤNG VỚI MỤC ĐÍCH THƯƠNG MẠI</a></li>
+
         </ul>
       </div>
       <div class="footer-col">
         <div class="col-title" data-i18n="Liên hệ">Liên hệ</div>
         <ul>
-          <li>Email: support@lazada.vn</li>
+          <li>Email: support@daiu.vn</li>
           <li>Hotline: 1900 1000</li>
           <li>8:00 - 22:00 (T2 - CN)</li>
         </ul>
@@ -418,16 +604,10 @@
           </a>
         </div>
       </div>
-      <div class="footer-col">
-        <div class="col-title" data-i18n="Đăng ký nhận tin">Đăng ký nhận tin</div>
-        <div class="newsletter">
-          <input type="email" data-i18n-placeholder="Nhập email của bạn" placeholder="Nhập email của bạn" aria-label="Email">
-          <button data-i18n="Đăng ký">Đăng ký</button>
-        </div>
-      </div>
     </div>
     <div class="footer-bottom">
-      <div class="container" data-i18n="© 2025 Lazada — Một dự án demo giao diện.">© 2025 Lazada — Một dự án demo giao diện.</div>
+      <a href="#" data-i18n="ĐÂY LÀ ĐỒ ÁN MÔN HỌC, KHÔNG SỬ DỤNG VỚI MỤC ĐÍCH THƯƠNG MẠI">ĐÂY LÀ ĐỒ ÁN MÔN HỌC, KHÔNG SỬ DỤNG VỚI MỤC ĐÍCH THƯƠNG MẠI</a>
+      <div class="container" data-i18n="© 2025 Lazada — Một dự án demo giao diện.">© 2025 Daiu — Một dự án demo giao diện.</div>
     </div>
   </footer>
 
