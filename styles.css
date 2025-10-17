@@ -352,7 +352,7 @@ body {
   margin-bottom: 1rem;
 }
 
-.about-page .container {
+.about .container {
   display: flex;
   flex-direction: column;
   gap: 5rem; /* Khoảng cách giữa các phần */
@@ -395,6 +395,7 @@ body {
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: var(--radius);
   background: var(--card);
+  gap: 1rem;
 }
 
 /* Timeline Section */
